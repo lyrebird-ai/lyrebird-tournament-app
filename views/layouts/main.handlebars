@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Lyrebird Voice Tournament App</title>
+</head>
+
+<body>
+    <style>
+        div.container {
+            text-align: center;
+            margin: 100px auto 0;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        table {
+            width: 40%;
+            margin: auto;
+            color: rgba(243, 243, 215, 1)
+        }
+
+        a {
+            display: inline-block;
+            background-color: #5a6188e6;
+            color: rgba(243, 243, 215, 1);
+            font-size: 1.5em;
+            font-family: Courier, sans-serif;
+            padding: 1em 5em;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-radius: 0.5em;
+            -moz-transition: 0.1s;
+            -webkit-transition: 0.1s;
+            transition: 0.1s;
+            position: relative;
+        }
+
+        a:hover {
+            background-color: #5a6188e6;
+            border-bottom-width: 0;
+            margin-top: 0.2em;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            background-color: #3b405b;
+            font-family: monospace;
+        }
+
+        h1 {
+            font-size: 50px;
+            margin-bottom: 50px !important;
+            margin-top: 100px !important;
+        }
+
+        h2 {
+            margin-bottom: 30px !important;
+        }
+
+        h1,
+        h2,
+        p,
+        audio,
+        button {
+            margin: 0 auto;
+            color: rgba(243, 243, 215, 1);
+            font-weight: normal;
+            text-align: center;
+        }
+
+        .icon-source {
+            display: none;
+        }
+
+        button {
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 7rem;
+            height: 8rem;
+            padding: 2rem 1rem;
+            border: none;
+            background-color: transparent;
+            color: rgba(243, 243, 215, 1);
+            font-family: inherit;
+            transition: opacity 0.3s;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: none;
+
+            & svg {
+                width: 100%;
+                height: 100%;
+                transition: transform 0.3s;
+            }
+            &::before {
+                position: absolute;
+                bottom: -0.5rem;
+                left: 0;
+                right: 0;
+                display: block;
+                margin: auto;
+                opacity: 0;
+                content: attr(title);
+                transition: opacity 1s;
+            }
+
+            &:hover::before {
+                opacity: 1;
+            }
+
+            &::after {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+                width: 2rem;
+                height: 2rem;
+                content: "";
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><path fill='rgba(243, 243, 215, 1)' d='M12,1.776l3.286,6.779l7.464,1.032l-5.433,5.221l1.326,7.417L12,18.67l-6.645,3.555l1.327-7.417L1.25,9.587l7.464-1.032L12,1.776z'/></svg>");
+                background-repeat: no-repeat;
+                background-size: 100%;
+                transform: rotate(10deg) translateY(1px);
+                animation: fadeIn 1s forwards 0.5s;
+                opacity: 0;
+            }
+        }
+
+        .icon-star {
+            stroke-width: 1;
+            stroke: rgba(242, 242, 194, 1);
+            stroke-dasharray: 84;
+            stroke-dashoffset: 85;
+            stroke-opacity: 0.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: rgba(242, 242, 194, 0);
+            animation: stroke 1s ease-in-out forwards;
+            transition: fill 0.3s;
+            transform: rotate(-30deg);
+            transform-origin: center;
+        }
+
+
+        .good-rate:hover {
+            &::after {
+                animation: goodStarHover 0.5s;
+            }
+            & svg {
+                animation: goodRateHover 0.5s ease-out forwards;
+            }
+        }
+
+        .good-rate:hover~.normal-rate,
+        .normal-rate:hover {
+            &::after {
+                animation: normalStarHover 0.5s;
+            }
+            & svg {
+                animation: normalRateHover 0.5s ease-out forwards;
+            }
+        }
+
+        .good-rate:hover~.bad-rate,
+        .normal-rate:hover~.bad-rate,
+        .bad-rate:hover {
+            &::after {
+                animation: badStarHover 0.5s;
+            }
+            & svg {
+                animation: badRateHover 0.5s ease-out forwards;
+            }
+        }
+
+        .wow-good-rate:hover .icon-star,
+        .wow-good-rate:hover~.very-good-rate .icon-star,
+        .wow-good-rate:hover~.good-rate .icon-star,
+        .wow-good-rate:hover~.normal-rate .icon-star,
+        .wow-good-rate:hover~.bad-rate .icon-star,
+
+        .very-good-rate:hover .icon-star,
+        .very-good-rate:hover~.good-rate .icon-star,
+        .very-good-rate:hover~.normal-rate .icon-star,
+        .very-good-rate:hover~.bad-rate .icon-star,
+
+        .good-rate:hover .icon-star,
+        .good-rate:hover~.normal-rate .icon-star,
+        .good-rate:hover~.bad-rate .icon-star,
+        .normal-rate:hover .icon-star,
+        .normal-rate:hover~.bad-rate .icon-star,
+        .bad-rate:hover .icon-star {
+            stroke-opacity: 0.8;
+            fill: rgba(242, 242, 194, 0.6);
+        }
+
+
+        @keyframes fadeIn {
+            to {
+                opacity: 0.1;
+            }
+        }
+
+        @keyframes stroke {
+            to {
+                stroke-dashoffset: 0;
+                transform: rotate(10deg);
+            }
+        }
+
+        @keyframes goodRateHover {
+            40% {
+                transform: scale(1.5) rotate(-5deg)
+            }
+            60% {
+                transform: scale(1.5) rotate(4deg)
+            }
+            75% {
+                transform: scale(1.5) rotate(-3deg)
+            }
+            100% {
+                transform: scale(1.5) rotate(0deg)
+            }
+        }
+
+        @keyframes normalRateHover {
+            40% {
+                transform: scale(1.25) rotate(-5deg)
+            }
+            60% {
+                transform: scale(1.25) rotate(4deg)
+            }
+            75% {
+                transform: scale(1.25) rotate(-3deg)
+            }
+            100% {
+                transform: scale(1.25) rotate(0deg)
+            }
+        }
+
+        @keyframes badRateHover {
+            40% {
+                transform: scale(1) rotate(-3deg)
+            }
+            60% {
+                transform: scale(1.1) rotate(3deg)
+            }
+            75% {
+                transform: scale(1.1) rotate(-1deg)
+            }
+            100% {
+                transform: scale(1) rotate(0deg)
+            }
+        }
+
+        @keyframes goodStarHover {
+            0% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0.1;
+            }
+            10% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0.5;
+            }
+            99% {
+                transform: rotate(10deg) translateY(1px) scale(5.5);
+                opacity: 0;
+            }
+            100% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes normalStarHover {
+            0% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0.1;
+            }
+            10% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0.5;
+            }
+            99% {
+                transform: rotate(10deg) translateY(1px) scale(4.75);
+                opacity: 0;
+            }
+            100% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes badStarHover {
+            0% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0.1;
+            }
+            10% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0.5;
+            }
+            99% {
+                transform: rotate(10deg) translateY(1px) scale(4);
+                opacity: 0;
+            }
+            100% {
+                transform: rotate(10deg) translateY(1px) scale(1);
+                opacity: 0;
+            }
+        }
+    </style>
+    {{{body}}}
+
+</body>
+
+</html>

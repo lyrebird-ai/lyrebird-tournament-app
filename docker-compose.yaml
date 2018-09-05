@@ -1,0 +1,14 @@
+version: '2'
+services:
+    app:
+        build: .
+        ports:
+            - 4040:4040
+        links:
+            - userdb
+        depends_on:
+            - userdb
+    userdb:
+        image: mongo:latest
+        ports:
+            - 27017:27017

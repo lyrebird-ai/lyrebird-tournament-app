@@ -1,0 +1,145 @@
+<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+<script>
+    function openAuth(event){
+      event.preventDefault()
+
+      const url = '/authorize'
+      const title = 'lyrebirdAuth'
+      const w = 550
+      const h = 700
+
+      var top = window.top.outerHeight / 2 + window.top.screenY - (h / 2)
+      var left = window.top.outerWidth / 2 + window.top.screenX - (w / 2)
+
+      var newWindow = window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, resizable=no, copyhistory=no, scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+      window.addEventListener('message', event => {
+        newWindow.close()
+        if (event.origin !== '{{publicUrl}}') {
+          return
+        }
+        location.reload()
+      }, false)
+
+      if (window.focus) {
+        newWindow.focus()
+      }
+    }
+    function vote(note){
+        window.location = '/vote?note='+note
+    }
+</script>
+<style>
+    .title {
+        font-size: 20px;
+        font-family: 'Permanent Marker', cursive;
+        position: absolute;
+        left: 60px;
+        top: 30px;
+    }
+    .title-icon {
+        font-size: 14px;
+        position: absolute;
+        top: 10px;
+    }
+</style>
+
+<div class="top-menu">
+  <img class="title-icon" width="60" height="60" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSItODAgMCA1MTIgNTEyIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPjxwYXRoIGQ9Im0xOTIuMDIzNDM4IDE2My44NzEwOTQgMTAuNjE3MTg3LTIuMTMyODEzYzEwLjgwNDY4Ny0xNS42MTMyODEgMTcuMTQwNjI1LTM0LjU1ODU5MyAxNy4xNDA2MjUtNTQuOTg4MjgxIDAtNTMuNDMzNTk0LTQzLjMxNjQwNi05Ni43NS05Ni43NS05Ni43NXMtOTYuNzUgNDMuMzE2NDA2LTk2Ljc1IDk2Ljc1YzAgMjAuNDI5Njg4IDYuMzM5ODQ0IDM5LjM3NSAxNy4xNDQ1MzEgNTQuOTg4MjgxbDEwLjYxNzE4OCAyLjEzMjgxM2M0NS41MzkwNjIgOS4xNTIzNDQgOTIuNDQxNDA2IDkuMTUyMzQ0IDEzNy45ODA0NjkgMHptMCAwIiBmaWxsPSIjNmY2MWFhIi8+PHBhdGggZD0ibTE5Mi4wMjM0MzggMTYzLjg3MTA5NGMtNDUuNTM5MDYzIDkuMTUyMzQ0LTkyLjQ0MTQwNyA5LjE1MjM0NC0xMzcuOTgwNDY5IDBsLTEwLjYxMzI4MS0yLjEzMjgxM2gtLjAwMzkwN2wyOS45MDYyNSAyNDguMjY5NTMxYzIuMDc4MTI1IDE3LjI1MzkwNyAxNi43MTg3NSAzMC4yMzgyODIgMzQuMDk3NjU3IDMwLjIzODI4MmgzMS4yMDcwMzFjMTcuMzc4OTA2IDAgMzIuMDE5NTMxLTEyLjk4NDM3NSAzNC4wOTc2NTYtMzAuMjM4MjgybDI5LjkwNjI1LTI0OC4yNjk1MzF6bTAgMCIgZmlsbD0iIzNiYjhlMyIvPjxwYXRoIGQ9Im0xMjMuMDMxMjUgMzEwLjU0Mjk2OWMtMTEuNTcwMzEyIDAtMjAuOTUzMTI1LTkuMzgyODEzLTIwLjk1MzEyNS0yMC45NTMxMjV2LTMzLjIzMDQ2OWMwLTExLjU3NDIxOSA5LjM4MjgxMy0yMC45NTMxMjUgMjAuOTUzMTI1LTIwLjk1MzEyNSAxMS41NzQyMTkgMCAyMC45NTcwMzEgOS4zNzg5MDYgMjAuOTU3MDMxIDIwLjk1MzEyNXYzMy4yMzA0NjljMCAxMS41NzAzMTItOS4zODI4MTIgMjAuOTUzMTI1LTIwLjk1NzAzMSAyMC45NTMxMjV6bTAgMCIgZmlsbD0iI2ZmZDE1ZSIvPjxwYXRoIGQ9Im0xMjMuMDMxMjUgNDc2LjM3ODkwNmMtOS44NjcxODggMC0xNy44NjMyODEtNy45OTYwOTQtMTcuODYzMjgxLTE3Ljg2MzI4MXYtMTguMjY5NTMxaDM1LjczMDQ2OXYxOC4yNjk1MzFjMCA5Ljg2NzE4Ny03Ljk5NjA5NCAxNy44NjMyODEtMTcuODY3MTg4IDE3Ljg2MzI4MXptMCAwIiBmaWxsPSIjYzE2YmFiIi8+PHBhdGggZD0ibTIyNi45NTMxMjUgMTI0Ljg2MzI4MWgtMjA3Ljc0MjE4N2MtMy4xNjc5NjkgMC01Ljk3NjU2My0yLjAyNzM0My02Ljk3MjY1Ny01LjAzNTE1NmwtLjI4MTI1LS44Mzk4NDRjLTIuNjI4OTA2LTcuOTQ5MjE5LTIuNjI4OTA2LTE2LjUyNzM0MyAwLTI0LjQ3NjU2MmwuMjgxMjUtLjgzOTg0NGMuOTk2MDk0LTMuMDA3ODEzIDMuODA0Njg4LTUuMDM1MTU2IDYuOTcyNjU3LTUuMDM1MTU2aDIwNy41NTg1OTNjMy4yMDcwMzEgMCA2LjA0Njg3NSAyLjA4MjAzMSA3LjAwNzgxMyA1LjE0NDUzMWwuNTExNzE4IDEuNjM2NzE5YzIuNTE1NjI2IDguMDA3ODEyIDIuMzcxMDk0IDE2LjYwOTM3NS0uNDA2MjUgMjQuNTMxMjUtMS4wMzEyNSAyLjk0MTQwNi0zLjgxMjUgNC45MTQwNjItNi45Mjk2ODcgNC45MTQwNjJ6bTAgMCIgZmlsbD0iI2MxNmJhYiIvPjxwYXRoIGQ9Im0xNTMuOTg4MjgxIDI4OS41ODk4NDR2LTMzLjIzMDQ2OWMwLTE3LjA2NjQwNi0xMy44ODY3MTktMzAuOTUzMTI1LTMwLjk1NzAzMS0zMC45NTMxMjUtMTcuMDY2NDA2IDAtMzAuOTUzMTI1IDEzLjg4NjcxOS0zMC45NTMxMjUgMzAuOTUzMTI1djMzLjIzMDQ2OWMwIDE3LjA2NjQwNiAxMy44ODY3MTkgMzAuOTUzMTI1IDMwLjk1MzEyNSAzMC45NTMxMjUgMTcuMDcwMzEyIDAgMzAuOTU3MDMxLTEzLjg4NjcxOSAzMC45NTcwMzEtMzAuOTUzMTI1em0tNDEuOTEwMTU2IDB2LTMzLjIzMDQ2OWMwLTYuMDM5MDYzIDQuOTE0MDYzLTEwLjk1MzEyNSAxMC45NTMxMjUtMTAuOTUzMTI1IDYuMDQyOTY5IDAgMTAuOTU3MDMxIDQuOTE0MDYyIDEwLjk1NzAzMSAxMC45NTMxMjV2MzMuMjMwNDY5YzAgNi4wMzkwNjItNC45MTQwNjIgMTAuOTUzMTI1LTEwLjk1NzAzMSAxMC45NTMxMjUtNi4wMzkwNjIgMC0xMC45NTMxMjUtNC45MTQwNjMtMTAuOTUzMTI1LTEwLjk1MzEyNXptMCAwIi8+PHBhdGggZD0ibTM0MS4yMzQzNzUgMzg1Ljc1MzkwNmMtNS41MjM0MzcgMC0xMCA0LjQ3NjU2My0xMCAxMHY4NC4xMTcxODhjMCA2LjY4NzUtNS40NDE0MDYgMTIuMTI4OTA2LTEyLjEyODkwNiAxMi4xMjg5MDZzLTEyLjEyODkwNy01LjQ0MTQwNi0xMi4xMjg5MDctMTIuMTI4OTA2di0yNTMuMTg3NWMwLTE4LjI5Njg3NS0xNC44ODY3MTgtMzMuMTgzNTk0LTMzLjE4MzU5My0zMy4xODM1OTRzLTMzLjE3OTY4OCAxNC44ODY3MTktMzMuMTc5Njg4IDMzLjE4MzU5NHYyNTkuMzYzMjgxYzAgMy4yODEyNS0yLjY3MTg3NSA1Ljk1MzEyNS01Ljk1MzEyNSA1Ljk1MzEyNWgtOTUuNjcxODc1Yy0zLjI4NTE1NiAwLTUuOTU3MDMxLTIuNjcxODc1LTUuOTU3MDMxLTUuOTUzMTI1di0xLjUyNzM0NGMxMC40NDE0MDYtNC4wMzEyNSAxNy44NjcxODgtMTQuMTY0MDYyIDE3Ljg2NzE4OC0yNi4wMDM5MDZ2LTEwLjAwMzkwNmMxNi43MzQzNzQtNC44MjAzMTMgMjkuNTg5ODQzLTE5LjI2MTcxOSAzMS43NjU2MjQtMzcuMzA0Njg4bDI5LjYxMzI4Mi0yNDUuODc4OTA2YzYuMjE0ODQ0LTkuNDM3NSAxMC44MjgxMjUtMTkuNjQ0NTMxIDEzLjc2MTcxOC0zMC40NjQ4NDRoLjkxNDA2M2MzLjYyODkwNiAwIDcuMTAxNTYzLTEuMTA1NDY5IDEwLjA0Mjk2OS0zLjE5OTIxOSAyLjk1NzAzMS0yLjEwMTU2MiA1LjE0NDUzMS01LjAxMTcxOCA2LjMyODEyNS04LjQxNzk2OCAzLjQ2ODc1LTkuODkwNjI1IDMuNjQ0NTMxLTIwLjgzNTkzOC41MDc4MTItMzAuNzkyOTY5bC0uNTE1NjI1LTEuNjY0MDYzYy0yLjI4MTI1LTcuMjY1NjI0LTguOTMzNTk0LTEyLjE0NDUzMS0xNi41NTA3ODEtMTIuMTQ0NTMxaC0uNzI2NTYzYy0xMi40OTYwOTMtNDYuMDM5MDYyLTU0LjU1NDY4Ny03OC42NDQ1MzEtMTAzLjAwMzkwNi03OC42NDQ1MzEtNDguNDQ5MjE4IDAtOTAuNTA3ODEyIDMyLjYwNTQ2OS0xMDMuMDAzOTA2IDc4LjY0MDYyNWgtLjgxNjQwNmMtNy40ODQzNzUgMC0xNC4xMDE1NjMgNC43Njk1MzEtMTYuNDY0ODQ0IDExLjg2MzI4MWwtLjI4OTA2Mi44NjMyODJjLTMuMjgxMjUgOS45MTc5NjgtMy4yODEyNSAyMC44NDM3NS4wMDc4MTIgMzAuNzg5MDYybC4yNzczNDQuODM1OTM4YzIuMzY3MTg3IDcuMDk3NjU2IDguOTg0Mzc1IDExLjg2NzE4NyAxNi40Njg3NSAxMS44NjcxODdoLjgxMjVjMi45MzM1OTQgMTAuODE2NDA2IDcuNTQyOTY4IDIxLjAyMzQzNyAxMy43NTM5MDYgMzAuNDY0ODQ0bDI5LjYyNSAyNDUuODgyODEyYzIuMTc1NzgxIDE4LjA0Mjk2OSAxNS4wMjczNDQgMzIuNDg0Mzc1IDMxLjc1NzgxMiAzNy4zMDQ2ODh2MTAuMDAzOTA2YzAgMTEuODM5ODQ0IDcuNDI5Njg4IDIxLjk3MjY1NiAxNy44NjcxODggMjZ2MS41MzEyNWMwIDE0LjMwODU5NCAxMS42NDA2MjUgMjUuOTUzMTI1IDI1Ljk1MzEyNSAyNS45NTMxMjVoOTUuNjcxODc1YzE0LjMxMjUgMCAyNS45NTMxMjUtMTEuNjQ0NTMxIDI1Ljk1MzEyNS0yNS45NTMxMjV2LTI1OS4zNjMyODFjMC03LjI2OTUzMiA1LjkxNDA2My0xMy4xODM1OTQgMTMuMTgzNTk0LTEzLjE4MzU5NHMxMy4xODM1OTMgNS45MTQwNjIgMTMuMTgzNTkzIDEzLjE4MzU5NHYyNTMuMTg3NWMwIDE3LjcxNDg0NCAxNC40MTAxNTcgMzIuMTI4OTA2IDMyLjEyODkwNyAzMi4xMjg5MDYgMTcuNzE0ODQzIDAgMzIuMTI4OTA2LTE0LjQxNDA2MiAzMi4xMjg5MDYtMzIuMTI4OTA2di04NC4xMTcxODhjMC01LjUyMzQzNy00LjQ3NjU2My0xMC0xMC0xMHptLTIyNi4wNjY0MDYgNzIuNzYxNzE5di04LjI3MzQzN2gxNS43MzA0Njl2OC4yNzM0MzdjMCA0LjMzNTkzNy0zLjUyNzM0NCA3Ljg2MzI4MS03Ljg2NzE4OCA3Ljg2MzI4MS00LjMzNTkzOCAwLTcuODYzMjgxLTMuNTI3MzQ0LTcuODYzMjgxLTcuODYzMjgxem03Ljg2NzE4Ny00MzguNTE1NjI1YzM3LjUwMzkwNiAwIDcwLjI4MTI1IDI0LjAzOTA2MiA4Mi4wODU5MzggNTguNjQwNjI1aC0yNC4xNjc5NjljLTUuNTE5NTMxIDAtMTAgNC40NzY1NjMtMTAgMTBzNC40ODA0NjkgMTAgMTAgMTBoNDMuODU5Mzc1YzEuNjA5Mzc1IDUuMjUgMS42Njc5NjkgMTAuOTMzNTk0LjE5NTMxMiAxNi4yMTg3NWgtMjAzLjg2NzE4N2MtMS41NjI1LTUuMzMyMDMxLTEuNTU4NTk0LTEwLjkwNjI1IDAtMTYuMjE4NzVoNzkuODEyNWM1LjUyMzQzNyAwIDEwLTQuNDc2NTYzIDEwLTEwcy00LjQ3NjU2My0xMC0xMC0xMGgtNjAuMDAzOTA2YzExLjgwMDc4MS0zNC42MDE1NjMgNDQuNTgyMDMxLTU4LjY0MDYyNSA4Mi4wODU5MzctNTguNjQwNjI1em04Mi4wOTc2NTYgMTE0Ljg1OTM3NWMtMi4xMzY3MTggNi4yNTc4MTMtNC45OTIxODcgMTIuMjQyMTg3LTguNTQ2ODc0IDE3Ljg5NDUzMWwtNi41MzEyNSAxLjMxMjVjLTQ0LjQ3MjY1NyA4LjkzNzUtODkuNTcwMzEzIDguOTM3NS0xMzQuMDQyOTY5IDBsLTYuNTM5MDYzLTEuMzEyNWMtMy41NTA3ODEtNS42NTYyNS02LjQwMjM0NC0xMS42MzY3MTgtOC41MzkwNjItMTcuODk0NTMxem0tMTIxLjg3MTA5MyAyNzMuOTUzMTI1LTI4LjI1NzgxMy0yMzQuNTYyNWMxLjA1MDc4Mi4yMDMxMjUgMi4xMDE1NjMuMzc1IDMuMTUyMzQ0LjU2NjQwNiAxLjMzNTkzOC4yNDYwOTQgMi42Njc5NjkuNDkyMTg4IDQuMDAzOTA2LjcyMjY1NiAxLjU2MjUuMjY5NTMyIDMuMTIxMDk0LjUxNTYyNiA0LjY4MzU5NC43NjE3MTkgMS4zMzIwMzEuMjEwOTM4IDIuNjY0MDYyLjQyOTY4OCA0IC42MjUgMS41NzAzMTIuMjMwNDY5IDMuMTQwNjI1LjQzNzUgNC43MTA5MzguNjQ4NDM4IDEuMzI0MjE4LjE3NTc4MSAyLjY0ODQzNy4zNjMyODEgMy45NzY1NjIuNTIzNDM3IDEuNTg5ODQ0LjE5NTMxMyAzLjE3OTY4OC4zNjMyODIgNC43NzM0MzguNTM5MDYzIDEuMzA0Njg3LjE0MDYyNSAyLjYxMzI4MS4yOTI5NjkgMy45MjE4NzQuNDIxODc1IDEuNjI1LjE2MDE1NiAzLjI1MzkwNy4yODkwNjIgNC44ODI4MTMuNDI1NzgxIDEuMjczNDM3LjEwOTM3NSAyLjU0Mjk2OS4yMjY1NjMgMy44MTI1LjMyMDMxMyAxLjcwNzAzMS4xMjUgMy40MTQwNjMuMjE4NzUgNS4xMjEwOTQuMzIwMzEyIDEuMTk1MzEyLjA3MDMxMiAyLjM4NjcxOS4xNTYyNSAzLjU4MjAzMS4yMTQ4NDQgMS44OTA2MjUuMDg5ODQ0IDMuNzc3MzQ0LjE0ODQzNyA1LjY2Nzk2OS4yMTA5MzcgMS4wMTE3MTkuMDMxMjUgMi4wMjM0MzcuMDgyMDMxIDMuMDM1MTU2LjEwOTM3NSAyLjg1NTQ2OS4wNzAzMTMgNS43MDcwMzEuMTA1NDY5IDguNTYyNS4xMDU0NjkuMDQ2ODc1IDAgLjA5Mzc1LjAwMzkwNi4xNDQ1MzEuMDAzOTA2LjEwNTQ2OSAwIC4yMTA5MzgtLjAwMzkwNi4zMTY0MDYtLjAwMzkwNiAyLjc5Njg3Ni0uMDAzOTA2IDUuNTkzNzUtLjAzOTA2MyA4LjM5MDYyNi0uMTA1NDY5Ljk2MDkzNy0uMDIzNDM3IDEuOTI1NzgxLS4wNzQyMTggMi44ODY3MTgtLjEwNTQ2OCAxLjk0MTQwNi0uMDYyNSAzLjg4MjgxMy0uMTIxMDk0IDUuODI0MjE5LS4yMTg3NSAxLjEzNjcxOS0uMDU0Njg4IDIuMjc3MzQ0LS4xMzY3MTkgMy40MTQwNjMtLjIwMzEyNiAxLjc2NTYyNC0uMTAxNTYyIDMuNTMxMjUtLjE5OTIxOCA1LjI5Njg3NC0uMzMyMDMxIDEuMjEwOTM4LS4wODU5MzcgMi40MjU3ODItLjIwMzEyNSAzLjYzNjcxOS0uMzA0Njg3IDEuNjkxNDA3LS4xNDA2MjUgMy4zNzg5MDctLjI3NzM0NCA1LjA2NjQwNy0uNDQxNDA2IDEuMjU3ODEyLS4xMjEwOTQgMi41MTU2MjQtLjI2OTUzMiAzLjc3MzQzNy0uNDA2MjUgMS42NDA2MjUtLjE3NTc4MiAzLjI4MTI1LS4zNTE1NjMgNC45MjE4NzUtLjU1NDY4OCAxLjI4OTA2Mi0uMTU2MjUgMi41NzQyMTktLjMzNTkzOCAzLjg2MzI4MS0uNTA3ODEyIDEuNjA1NDY5LS4yMTQ4NDQgMy4yMTQ4NDQtLjQyOTY4OCA0LjgyMDMxMy0uNjY0MDYzIDEuMzA4NTk0LS4xOTE0MDYgMi42MTcxODctLjQwNjI1IDMuOTI1NzgxLS42MTMyODEgMS41ODIwMzEtLjI1IDMuMTY0MDYzLS41IDQuNzQyMTg3LS43NzM0MzggMS4zMjgxMjYtLjIyNjU2MiAyLjY1NjI1LS40NzI2NTYgMy45ODQzNzYtLjcxNDg0NCAxLjA1MDc4MS0uMTk1MzEyIDIuMTA1NDY4LS4zNjcxODcgMy4xNTYyNS0uNTcwMzEybC0yOC4yNSAyMzQuNTYyNWMtMS40NzI2NTcgMTIuMjE0ODQ0LTExLjg2MzI4MiAyMS40MjU3ODEtMjQuMTcxODc2IDIxLjQyNTc4MWgtMzEuMjEwOTM3Yy0xMi4yOTY4NzUgMC0yMi42ODc1LTkuMjEwOTM3LTI0LjE2MDE1Ni0yMS40MjU3ODF6bTAgMCIvPjxwYXRoIGQ9Im0xNDAuOTUzMTI1IDk4LjYzNjcxOWguMTk5MjE5YzUuNTIzNDM3IDAgMTAtNC40NzY1NjMgMTAtMTAgMC01LjUyMzQzOC00LjQ3NjU2My0xMC0xMC0xMGgtLjE5OTIxOWMtNS41MjM0MzcgMC0xMCA0LjQ3NjU2Mi0xMCAxMCAwIDUuNTIzNDM3IDQuNDc2NTYzIDEwIDEwIDEwem0wIDAiLz48L3N2Zz4K" />
+
+  <p class="title">LVT</p>
+</div>
+
+<h1>Let's rate it</h1>
+<h2>Discover the best synthetic voice in town. Vote for the most realistic, most beautiful voice ever created!</h2>
+
+{{#if audio}}
+<audio style="display:none;" id="player" controls>
+  <source src="{{audio}}" type="audio/wav">
+</audio>
+{{/if}}
+
+{{#if participants}}
+<div style="margin:0" class="container">
+  <a onclick="document.getElementById('player').play()" href="#">Hear {{name}}'s voice</a>
+</div>
+
+<svg class="icon-source">
+    <defs>
+        <path id="star" d="M12,1.776l3.286,6.779l7.464,1.032l-5.433,5.221l1.326,7.417L12,18.67l-6.645,3.555l1.327-7.417L1.25,9.587l7.464-1.032L12,1.776z"/>
+    </defs>
+</svg>
+
+<p dir="rtl">
+    <button onclick="vote(5)" title="wow" class="wow-good-rate">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1990/link" viewBox="0 0 24 24">
+            <use xlink:href="#star" class="icon-star" />
+        </svg>
+    </button>
+    <button onclick="vote(4)"  title="awesome" class="very-good-rate">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1990/link" viewBox="0 0 24 24">
+            <use xlink:href="#star" class="icon-star" />
+        </svg>
+    </button>
+    <button onclick="vote(3)"  title="pretty good" class="good-rate">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1990/link" viewBox="0 0 24 24">
+            <use xlink:href="#star" class="icon-star" />
+        </svg>
+    </button>
+    <button onclick="vote(2)"  title="cool" class="normal-rate">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1990/link" viewBox="0 0 24 24">
+            <use xlink:href="#star" class="icon-star" />
+        </svg>
+    </button>
+    <button onclick="vote(1)"  title="so-so" class="bad-rate">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1990/link" viewBox="0 0 24 24">
+            <use xlink:href="#star" class="icon-star" />
+        </svg>
+    </button>
+</p>
+{{/if}}
+
+<div class='container'>
+    <a href='/authorize' onClick='openAuth(event)'>Participate with your voice avatar!</a>
+</div>
+
+<h1>Leaderboard</h1>
+<table>
+    <tr>
+        <th>
+            Position
+        </th>
+        <th>
+            Voice
+        </th>
+        <th>
+            Name
+        </th>
+
+        <th>
+            Rate
+        </th>
+    </tr>
+    {{#each participants}}
+    <tr>
+        <td>
+            #{{math @index "+" 1}}
+
+        </td>
+        <td>
+            <audio style="display:none" id="{{@index}}" controls>
+                <source src="{{audio}}" type="audio/wav">
+            </audio>
+            <div  style="margin:0; text-align:left" class="container">
+                <a  style="padding-bottom:10px;  padding-top:10px;" onclick="document.getElementById('{{@index}}').play()" href="#">Play</a>
+            </div>
+        </td>
+        <td>
+            {{name}}
+        </td>
+        <td>
+            {{note}}
+        </td>
+    </tr>
+    {{/each}}
+</table>

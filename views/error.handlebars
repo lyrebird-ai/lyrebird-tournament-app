@@ -1,0 +1,9 @@
+<h1>YOU ARE ALREADY PART OF THE TOURNAMENT</h1>
+
+<a href="/">Cast your vote!</a>
+
+<script>
+if (window.opener) {
+  window.opener.postMessage({accessGranted: false}, '{{publicUrl}}')
+}
+</script>
